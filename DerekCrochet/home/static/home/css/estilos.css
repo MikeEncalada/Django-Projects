@@ -1,0 +1,85 @@
+@font-face {
+    font-family: 'RubikBubbles';
+    src: url('../fuentes/RubikBubbles-Regular.ttf') format('truetype');
+}
+
+
+
+.colorFondoPrimario{
+    background-color: #8C64FA;
+}
+
+.colorFondoSecundario{
+    background-color: #FAED64;
+}
+
+.fuenteLogo{
+    font-family: 'RubikBubbles', cursive;
+}
+
+.navbar-nav .nav-link {
+    color: black;
+}
+
+.nav-item{
+    font-weight: bold;
+}
+
+.nav-item:hover{
+    text-decoration: underline;
+}
+
+footer {
+    padding: 20px;
+    text-align: center;
+}
+
+.carousel-caption{
+    bottom: 50%;
+}
+
+.carousel-item img{
+    width: 100%;
+    height: 600px;
+    object-fit: cover;
+} 
+
+
+.row{
+    align-items: stretch;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+.card {
+    /*float: left;*/
+    max-width: 370px;
+    padding: 0;
+    margin-bottom: 2rem;
+    flex-basis:  370px;
+    flex-grow: 0;
+    flex-shrink: 0;
+    border: 2px solid #000;
+}
+  
+.card > img {
+    margin-bottom: .75rem;
+    width: 100%;
+}
+  
+.card-text {
+    font-size: 85%;
+}
+
+.row::-webkit-scrollbar {
+    display: none;
+}
+
+.cardHome{
+    height: 200px;
+    width: 100px;
+}
+

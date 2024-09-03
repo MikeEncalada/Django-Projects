@@ -1,0 +1,59 @@
+{% extends "home/base.html" %}
+
+{% block content %}
+
+
+<div class="d-flex justify-content-center m-5">
+    <form action="{% url 'catalogo' %}" method="GET">
+      <select name="categoria">
+        <option class="rounded" value="" selected disabled>Selecciona una categoría</option>
+        {% for categoria in categorias %}
+        <option class="rounded" value="{{categoria.id}}">{{categoria.nombre}}</option>
+        {% endfor %}
+      </select>
+      <button class="rounded colorFondoSecundario" type="submit"><i class="fa-solid fa-filter"></i> Filtrar</button>
+    </form>
+</div>
+
+<ul>
+    <div class="d-flex flex-wrap justify-content-center">
+    {% for producto in page_obj %}
+        <div class="card mx-2 colorFondoSecundario">
+            <img class="card-img-top" src="{{producto.imagen.url}}">
+            <div class="card-body">
+                <h5 class="card-title">{{producto.nombre}}</h5>
+                <p class="card-text" style="margin: 0;"> <strong>Precio:</strong> $ {{producto.precio}}</p>
+                <p class="card-text"><strong>Dimensiones:</strong> {{producto.alto}} x {{producto.ancho}} cm</p>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+    
+</ul>
+  
+<div class="container-fluid">
+    <div class="row my-4 mx-1" >
+        <div class="col">
+            {% if page_obj.has_previous %}
+            <a href="?categoria={{ request.GET.categoria }}&page=1">&laquo; Primera</a>
+            <a href="?categoria={{ request.GET.categoria }}&page={{ page_obj.previous_page_number }}">Anterior</a>
+            {% endif %}
+        </div>
+        
+        <div class="col text-center">
+            <span class="current fw-bold">
+            Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.
+            </span>
+        </div>
+        
+        <div class="col text-end">
+            {% if page_obj.has_next %}
+            <a href="?categoria={{ request.GET.categoria }}&page={{ page_obj.next_page_number }}">Siguiente</a> 
+            <a href="?categoria={{ request.GET.categoria }}&page={{ page_obj.paginator.num_pages }}">Última &raquo;</a>
+            {% endif %}
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

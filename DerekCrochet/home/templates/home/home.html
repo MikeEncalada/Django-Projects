@@ -1,0 +1,74 @@
+{% extends "home/base.html" %}
+
+{% block content %}
+
+    <!-- Carousel -->
+    <div id="demo" class="carousel slide" data-bs-ride="carousel">
+
+        <!-- Indicators/dots -->
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
+            <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
+            <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
+        </div>
+    
+        <!-- The slideshow/carousel -->
+        <div class="carousel-inner">
+
+            {# Aqui iría el for #}
+
+            {% for categoria in categoriasActivadas %}
+
+            <div class="carousel-item {% if forloop.first %} active {% endif %}">
+                <img src="{{categoria.imagen.url}}" class="d-block w-100">
+                <div class="carousel-caption d-none d-md-block text-start">
+                    <h3>{{categoria.nombre}}</h3>
+                    <p>{{categoria.descripcion}}</p>
+                    <button class="btn btn-info colorFondoSecundario">Ver mas</button>
+                </div>
+            </div>
+
+
+            {% endfor %}
+        </div>
+    
+        <!-- Left and right controls/icons -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </button>
+    </div>
+
+
+    {% for categoria in categoriasActivadas %}
+    <div>
+        <div class="py-4 px-3 colorFondoPrimario mb-3">
+            <div class="d-flex justify-content-between align-items-center">
+                <h4 class="m-0">{{categoria.nombre}}</h4>
+                <div>
+                    <button class="btn btn-info colorFondoSecundario" style="border: 2px solid #000;"><i class="fa-solid fa-arrow-left mx-4"></i></button>
+                    <button class="btn btn-info colorFondoSecundario" style="border: 2px solid #000;"><i class="fa-solid fa-arrow-right mx-4"></i></button> 
+                </div>  
+            </div>
+        </div>
+
+        <div class="container-fluid">
+            <div class="row">
+            {% for producto in categoria.producto_set.all|slice:":5" %}
+                <div class="card mx-2 colorFondoSecundario">
+                    <img class="card-img-top" src="{{producto.imagen.url}}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{producto.nombre}}</h5>
+                        <p class="card-text" style="margin: 0;"> <strong>Precio:</strong> $ {{producto.precio}}</p>
+                        <p class="card-text"><strong>Dimensiones:</strong> {{producto.alto}} x {{producto.ancho}} cm</p>
+                    </div>
+                </div>
+            {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+{% endblock %}
